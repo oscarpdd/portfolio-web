@@ -11,12 +11,23 @@ EXPOSE 8000
 
 ARG DEV=false
 RUN python -m venv /py && \
+    # Upgrade pip.
     /py/bin/pip install --upgrade pip && \
+    # Install packages for Psycopg2 adaptor. \
+    # - Install used dependencies (use and installation).
+    apk add --update --no-cache postgresql-client && \
+    # - Install installation dependencies (temporal).
+    apk add --update --no-cache --virtual .tmp-build-deps \
+      build-base postgresql-dev musl-dev && \
+    # Install requirements.
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
+    # Remove temporal files.
     rm -rf /tmp && \
+    # Remove temporal dependencies for installing psycopg2.
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
