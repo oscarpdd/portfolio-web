@@ -70,4 +70,3 @@ class LogoutView(View):
         if request.user.is_authenticated:
             logout(request)
             return HttpResponseRedirect(self.success_url)
-
