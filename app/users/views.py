@@ -36,6 +36,8 @@ class LoginUserView(auth_views.LoginView):
                    'app_name': self.app_name,
                    'page_name': self.page_name}
         if context['valid_form']:
+            if not login_form.cleaned_data.get('remember_me'):
+                request.session.set_expiry(0)
             auth_login(request, login_form.get_user())
             return HttpResponseRedirect(self.success_url)
         return render(request, template_name=self.template_name,
