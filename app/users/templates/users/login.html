@@ -4,33 +4,37 @@
 
 {% block title %}Log in{% endblock %}
 
-{% block app_name %}core{% endblock %}
+{% block app_name %}{{ app_name }}{% endblock %}
+
+{% block page_name %}{{ page_name }}{% endblock %}
 
 {% block content %}
 
 <div class="jumbotron d-flex justify-content-center">
   <div class="container-fluid">
     <h3 class="display-3 text-center pt-2 pb-2">Log-in</h3>
+
     {% if not valid_form %}
       <div class="alert alert-danger">
-        <p>Email or Password were incorrect, please try again.</p>
+        <p style="margin: 0">Email or Password were incorrect, please try again.</p>
       </div>
     {% endif %}
+
     <form class="form-group" method="POST">
       {% csrf_token %}
       <!-- Email -->
       <div class="mb-3 row">
         <label class="form-label pt-1 col-sm-2 col-form-label" for="email">E-mail</label>
         <div class="col-sm-10">
-          <input name="email" class="form-control" id="email" type="email" placeholder="example@example.com">
+          <input type="email" name="email" autofocus maxlength="255" class="form-control" id="email" placeholder="example@example.com" required>
         </div>
       </div>
 
       <!-- Password -->
       <div class="mb-3 row">
-        <label class="form-label pt-1 col-sm-2 col-form-label" for="password">Password</label>
+        <label class="form-label pt-1 col-sm-2 col-form-label" for="id_password">Password</label>
         <div class="col-sm-10">
-          <input name="password" class="form-control" id="password" type="password">
+          <input type="password" name="password" class="form-control" id="id_password" required>
         </div>
       </div>
 

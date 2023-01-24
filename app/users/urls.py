@@ -10,6 +10,6 @@ urlpatterns = [
             views.LoginUserView.as_view(), name='login'),
     re_path(r'^(?P<app>[a-z]+)/my_profile',
             views.MyProfileView.as_view(), name='my_profile'),
-    re_path(r'^(?P<app>[a-z]+)$',
-            views.LoginUserView.as_view(), name='users_home')
+    re_path(r'^(?P<app>[a-z]+)/logout$',
+            views.LogoutView.as_view(), name='app_logout'),
 ]
