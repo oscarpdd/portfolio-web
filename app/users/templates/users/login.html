@@ -1,0 +1,63 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}Log in{% endblock %}
+
+{% block app_name %}{{ app_name }}{% endblock %}
+
+{% block page_name %}{{ page_name }}{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron d-flex justify-content-center">
+  <div class="container-fluid">
+    <h3 class="display-3 text-center pt-2 pb-2">Log-in</h3>
+
+    {% if not valid_form %}
+      <div class="alert alert-danger">
+        <p style="margin: 0">Email or Password were incorrect, please try again.</p>
+      </div>
+    {% endif %}
+
+    <form class="form-group" method="POST">
+      {% csrf_token %}
+      <!-- Email -->
+      <div class="mb-3 row">
+        <label class="form-label pt-1 col-sm-2 col-form-label" for="email">E-mail</label>
+        <div class="col-sm-10">
+          <input type="email" name="email" autofocus maxlength="255" class="form-control" id="email" placeholder="example@example.com" required>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 row">
+        <label class="form-label pt-1 col-sm-2 col-form-label" for="id_password">Password</label>
+        <div class="col-sm-10">
+          <input type="password" name="password" class="form-control" id="id_password" required>
+        </div>
+      </div>
+
+      <!-- Remember and forgot password inline -->
+      <div class="row mb-2">
+        <!-- Remember me -->
+        <div class="col d-flex justify-content-center">
+          <div class="form-check">
+            <input name="remember_me" class="form-check-input" type="checkbox" value="True" id="rememberLogin" checked>
+            <label for="rememberLogin" class="form-check-label">Remember me</label>
+          </div>
+        </div>
+        <!-- Forgot password -->
+        <div class="col d-flex justify-content-center">
+          <a href="#">Forgot password?</a>
+        </div>
+
+      </div>
+      <div class="container-fluid d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-block mb-3">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
